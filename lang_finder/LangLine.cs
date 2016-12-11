@@ -17,16 +17,16 @@ namespace lang_finder
         {
             get
             {
-                return fileid.Trim('"') + '-' + unknown.Trim('"') + '-' + index.Trim('"');
+                return fileid + '-' + unknown + '-' + index;
             }
         }
 
         public LangLine(string line)
         {
             string[] words = line.Trim().Split(new char[] { ',' }, 5);
-            fileid = words[0];
-            unknown = words[1];
-            index = words[2];
+            fileid = words[0].Trim('"');
+            unknown = words[1].Trim('"');
+            index = words[2].Trim('"');
             text = words[4].Substring(1, words[4].Length - 2);
         }
     }

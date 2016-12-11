@@ -13,6 +13,7 @@ namespace lang_finder
     public partial class Finder : Form
     {
         private CsvLoader csvLoader;
+        private LangDef langDef;
 
         private delegate void UnlockUiDelegate();
         private UnlockUiDelegate unlockUi;
@@ -25,6 +26,7 @@ namespace lang_finder
             InitializeComponent();
             unlockUi = () => buttonSearch.Enabled = true;
             showSearchResult = (results) => ShowSearchResult(results);
+            langDef = new LangDef();
             // 异步加载原文数据
             Task.Run(new Action(LoadCsv));
         }
@@ -84,7 +86,7 @@ namespace lang_finder
             }
             if (results.Count <= 0)
             {
-                AddLangLineResult(new LangLine(",,,,未找到结果"));
+                AddLangLineResult(new LangLine(",,,,'未找到结果'"));
             }
         }
 
@@ -92,8 +94,8 @@ namespace lang_finder
         private void AddLangLineResult(LangLine langLine)
         {
             ListViewItem item = new ListViewItem();
-            item.SubItems[0].Text = "未知";
-            item.SubItems.Add(langLine.id);
+            item.SubItems[0].Text = langDef.GetCategoryName(langLine.fileid);
+            item.SubItems.Add(langDef.GetCategory(langLine.fileid) + '-' + langLine.id);
             item.SubItems.Add(langLine.text);
             listViewResult.Items.Add(item);
         }
