@@ -35,7 +35,7 @@
             this.checkBoxRegex = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.listViewResult = new System.Windows.Forms.ListView();
-            this.checkBoxCase = new System.Windows.Forms.CheckBox();
+            this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBoxKeyword
@@ -85,9 +85,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label2.Location = new System.Drawing.Point(105, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(413, 12);
+            this.label2.Size = new System.Drawing.Size(437, 12);
             this.label2.TabIndex = 4;
-            this.label2.Text = "模糊匹配，例如\".*\"表示任意（不含引号），\"^\"表示文本开始，\"$\"表示结束";
+            this.label2.Text = "模糊匹配，暂只支持\".*\"表示任意（不含引号），\"^\"表示文本开始，\"$\"表示结束";
             // 
             // listViewResult
             // 
@@ -100,22 +100,22 @@
             this.listViewResult.UseCompatibleStateImageBehavior = false;
             this.listViewResult.View = System.Windows.Forms.View.Details;
             // 
-            // checkBoxCase
+            // checkBoxIgnoreCase
             // 
-            this.checkBoxCase.AutoSize = true;
-            this.checkBoxCase.Location = new System.Drawing.Point(14, 61);
-            this.checkBoxCase.Name = "checkBoxCase";
-            this.checkBoxCase.Size = new System.Drawing.Size(84, 16);
-            this.checkBoxCase.TabIndex = 6;
-            this.checkBoxCase.Text = "区分大小写";
-            this.checkBoxCase.UseVisualStyleBackColor = true;
+            this.checkBoxIgnoreCase.AutoSize = true;
+            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(14, 61);
+            this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
+            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(84, 16);
+            this.checkBoxIgnoreCase.TabIndex = 6;
+            this.checkBoxIgnoreCase.Text = "忽略大小写";
+            this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
             // 
             // Finder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 484);
-            this.Controls.Add(this.checkBoxCase);
+            this.Controls.Add(this.checkBoxIgnoreCase);
             this.Controls.Add(this.listViewResult);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBoxRegex);
@@ -139,7 +139,7 @@
         private System.Windows.Forms.CheckBox checkBoxRegex;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listViewResult;
-        private System.Windows.Forms.CheckBox checkBoxCase;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreCase;
     }
 }
 

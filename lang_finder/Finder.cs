@@ -17,10 +17,14 @@ namespace lang_finder
         private delegate void UnlockUiDelegate();
         private UnlockUiDelegate unlockUi;
 
+        private delegate void ShowSearchResultDelegate(List<LangLine> results);
+        private ShowSearchResultDelegate showSearchResult;
+
         public Finder()
         {
             InitializeComponent();
             unlockUi = () => buttonSearch.Enabled = true;
+            showSearchResult = (results) => ShowSearchResult(results);
             // 异步加载原文数据
             Task.Run(new Action(LoadCsv));
         }
@@ -59,15 +63,39 @@ namespace lang_finder
         {
             listViewResult.Clear();
             InitListView();
-            List<LangLine> results = csvLoader.Search(textBoxKeyword.Text);
+            // 异步搜索
+            Task.Run(new Action(Search));
+        }
+
+        // 异步搜索
+        private void Search()
+        {
+            List<LangLine> results = csvLoader.Search(textBoxKeyword.Text,
+                checkBoxRegex.Checked, checkBoxIgnoreCase.Checked);
+            Invoke(showSearchResult, new object[] { results });
+        }
+
+        // 异步显示搜索结果
+        private void ShowSearchResult(List<LangLine> results)
+        {
             foreach (LangLine langLine in results)
             {
-                ListViewItem item = new ListViewItem();
-                item.SubItems[0].Text = "未知";
-                item.SubItems.Add(langLine.id);
-                item.SubItems.Add(langLine.text);
-                listViewResult.Items.Add(item);
+                AddLangLineResult(langLine);
             }
+            if (results.Count <= 0)
+            {
+                AddLangLineResult(new LangLine(",,,,未找到结果"));
+            }
+        }
+
+        // 添加一项
+        private void AddLangLineResult(LangLine langLine)
+        {
+            ListViewItem item = new ListViewItem();
+            item.SubItems[0].Text = "未知";
+            item.SubItems.Add(langLine.id);
+            item.SubItems.Add(langLine.text);
+            listViewResult.Items.Add(item);
         }
     }
 }

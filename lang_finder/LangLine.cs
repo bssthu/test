@@ -27,7 +27,7 @@ namespace lang_finder
             fileid = words[0];
             unknown = words[1];
             index = words[2];
-            text = words[4];
+            text = words[4].Substring(1, words[4].Length - 2);
         }
     }
 }
