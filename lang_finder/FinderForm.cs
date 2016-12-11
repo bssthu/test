@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace lang_finder
 {
-    public partial class Finder : Form
+    public partial class FinderForm : Form
     {
         private CsvLoader csvLoader;
         private LangDef langDef;
@@ -21,12 +21,15 @@ namespace lang_finder
         private delegate void ShowSearchResultDelegate(List<LangLine> results);
         private ShowSearchResultDelegate showSearchResult;
 
-        public Finder()
+        public FinderForm()
         {
             InitializeComponent();
             langDef = new LangDef();
 
+            checkBoxRegex.Checked = Properties.Settings.Default.useRegex;
+            checkBoxIgnoreCase.Checked = Properties.Settings.Default.ignoreCase;
             AcceptButton = buttonSearch;
+
             unlockUi = () => buttonSearch.Enabled = true;
             showSearchResult = (results) => ShowSearchResult(results);
             // 异步加载原文数据
@@ -37,6 +40,15 @@ namespace lang_finder
         {
             // 初始化 GridView
             InitResultView();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            // save settings
+            Properties.Settings.Default.useRegex = checkBoxRegex.Checked;
+            Properties.Settings.Default.ignoreCase = checkBoxIgnoreCase.Checked;
+            Properties.Settings.Default.Save();
+            base.OnClosing(e);
         }
 
         // 初始化 ListView

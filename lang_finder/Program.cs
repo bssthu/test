@@ -16,7 +16,7 @@ namespace lang_finder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Finder());
+            Application.Run(new FinderForm());
         }
     }
 }
