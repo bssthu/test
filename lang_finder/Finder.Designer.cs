@@ -35,6 +35,7 @@
             this.checkBoxRegex = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.listViewResult = new System.Windows.Forms.ListView();
+            this.checkBoxCase = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBoxText
@@ -59,6 +60,7 @@
             // buttonSearch
             // 
             this.buttonSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSearch.Enabled = false;
             this.buttonSearch.Location = new System.Drawing.Point(494, 10);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(75, 23);
@@ -90,18 +92,29 @@
             // 
             this.listViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewResult.Location = new System.Drawing.Point(14, 61);
+            this.listViewResult.Location = new System.Drawing.Point(14, 83);
             this.listViewResult.Name = "listViewResult";
-            this.listViewResult.Size = new System.Drawing.Size(555, 411);
+            this.listViewResult.Size = new System.Drawing.Size(555, 389);
             this.listViewResult.TabIndex = 5;
             this.listViewResult.UseCompatibleStateImageBehavior = false;
             this.listViewResult.View = System.Windows.Forms.View.Details;
+            // 
+            // checkBoxCase
+            // 
+            this.checkBoxCase.AutoSize = true;
+            this.checkBoxCase.Location = new System.Drawing.Point(14, 61);
+            this.checkBoxCase.Name = "checkBoxCase";
+            this.checkBoxCase.Size = new System.Drawing.Size(84, 16);
+            this.checkBoxCase.TabIndex = 6;
+            this.checkBoxCase.Text = "区分大小写";
+            this.checkBoxCase.UseVisualStyleBackColor = true;
             // 
             // Finder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 484);
+            this.Controls.Add(this.checkBoxCase);
             this.Controls.Add(this.listViewResult);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBoxRegex);
@@ -125,6 +138,7 @@
         private System.Windows.Forms.CheckBox checkBoxRegex;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listViewResult;
+        private System.Windows.Forms.CheckBox checkBoxCase;
     }
 }
 
