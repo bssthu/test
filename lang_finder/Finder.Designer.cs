@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Finder));
-            this.textBoxText = new System.Windows.Forms.TextBox();
+            this.textBoxKeyword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.checkBoxRegex = new System.Windows.Forms.CheckBox();
@@ -38,15 +38,15 @@
             this.checkBoxCase = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // textBoxText
+            // textBoxKeyword
             // 
-            this.textBoxText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxText.Location = new System.Drawing.Point(47, 12);
-            this.textBoxText.Name = "textBoxText";
-            this.textBoxText.Size = new System.Drawing.Size(441, 21);
-            this.textBoxText.TabIndex = 0;
-            this.textBoxText.WordWrap = false;
+            this.textBoxKeyword.Location = new System.Drawing.Point(47, 12);
+            this.textBoxKeyword.Name = "textBoxKeyword";
+            this.textBoxKeyword.Size = new System.Drawing.Size(441, 21);
+            this.textBoxKeyword.TabIndex = 0;
+            this.textBoxKeyword.WordWrap = false;
             // 
             // label1
             // 
@@ -67,6 +67,7 @@
             this.buttonSearch.TabIndex = 2;
             this.buttonSearch.Text = "搜索";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // checkBoxRegex
             // 
@@ -120,7 +121,7 @@
             this.Controls.Add(this.checkBoxRegex);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxText);
+            this.Controls.Add(this.textBoxKeyword);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Finder";
             this.Text = "ESO 文本搜索";
@@ -132,7 +133,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxText;
+        private System.Windows.Forms.TextBox textBoxKeyword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.CheckBox checkBoxRegex;

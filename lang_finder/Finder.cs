@@ -28,6 +28,12 @@ namespace lang_finder
         private void Finder_Load(object sender, EventArgs e)
         {
             // 初始化 ListView
+            InitListView();
+        }
+
+        // 初始化 ListView
+        private void InitListView()
+        {
             listViewResult.GridLines = true;
             listViewResult.Columns.Add("类型", 80);
             listViewResult.Columns.Add("编号", 160);
@@ -45,6 +51,22 @@ namespace lang_finder
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
+            }
+        }
+
+        // 搜索
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            listViewResult.Clear();
+            InitListView();
+            List<LangLine> results = csvLoader.Search(textBoxKeyword.Text);
+            foreach (LangLine langLine in results)
+            {
+                ListViewItem item = new ListViewItem();
+                item.SubItems[0].Text = "未知";
+                item.SubItems.Add(langLine.id);
+                item.SubItems.Add(langLine.text);
+                listViewResult.Items.Add(item);
             }
         }
     }

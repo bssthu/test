@@ -13,6 +13,14 @@ namespace lang_finder
         public string index { get; private set; }
         public string text { get; private set; }
 
+        public string id
+        {
+            get
+            {
+                return fileid.Trim('"') + '-' + unknown.Trim('"') + '-' + index.Trim('"');
+            }
+        }
+
         public LangLine(string line)
         {
             string[] words = line.Trim().Split(new char[] { ',' }, 5);
