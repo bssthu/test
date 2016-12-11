@@ -1,0 +1,9 @@
+*.suo
+.vs/
+lang_finder/bin/
+lang_finder/obj/
+
+Thumbs.db
+.DS_Store
+*~
+*.swp
