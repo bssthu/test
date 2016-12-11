@@ -34,8 +34,9 @@
             this.buttonSearch = new System.Windows.Forms.Button();
             this.checkBoxRegex = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.listViewResult = new System.Windows.Forms.ListView();
             this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
+            this.dataGridViewResult = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxKeyword
@@ -89,17 +90,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "模糊匹配，暂只支持\".*\"表示任意（不含引号），\"^\"表示文本开始，\"$\"表示结束";
             // 
-            // listViewResult
-            // 
-            this.listViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewResult.Location = new System.Drawing.Point(14, 83);
-            this.listViewResult.Name = "listViewResult";
-            this.listViewResult.Size = new System.Drawing.Size(555, 389);
-            this.listViewResult.TabIndex = 5;
-            this.listViewResult.UseCompatibleStateImageBehavior = false;
-            this.listViewResult.View = System.Windows.Forms.View.Details;
-            // 
             // checkBoxIgnoreCase
             // 
             this.checkBoxIgnoreCase.AutoSize = true;
@@ -110,13 +100,27 @@
             this.checkBoxIgnoreCase.Text = "忽略大小写";
             this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewResult
+            // 
+            this.dataGridViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewResult.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewResult.Location = new System.Drawing.Point(14, 84);
+            this.dataGridViewResult.Name = "dataGridViewResult";
+            this.dataGridViewResult.ReadOnly = true;
+            this.dataGridViewResult.RowTemplate.Height = 23;
+            this.dataGridViewResult.Size = new System.Drawing.Size(555, 388);
+            this.dataGridViewResult.TabIndex = 7;
+            // 
             // Finder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 484);
+            this.Controls.Add(this.dataGridViewResult);
             this.Controls.Add(this.checkBoxIgnoreCase);
-            this.Controls.Add(this.listViewResult);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBoxRegex);
             this.Controls.Add(this.buttonSearch);
@@ -126,6 +130,7 @@
             this.Name = "Finder";
             this.Text = "ESO 文本搜索";
             this.Load += new System.EventHandler(this.Finder_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,8 +143,8 @@
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.CheckBox checkBoxRegex;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listViewResult;
         private System.Windows.Forms.CheckBox checkBoxIgnoreCase;
+        private System.Windows.Forms.DataGridView dataGridViewResult;
     }
 }
 

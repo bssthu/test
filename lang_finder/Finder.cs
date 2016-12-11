@@ -24,26 +24,30 @@ namespace lang_finder
         public Finder()
         {
             InitializeComponent();
+            langDef = new LangDef();
+
+            AcceptButton = buttonSearch;
             unlockUi = () => buttonSearch.Enabled = true;
             showSearchResult = (results) => ShowSearchResult(results);
-            langDef = new LangDef();
             // 异步加载原文数据
             Task.Run(new Action(LoadCsv));
         }
 
         private void Finder_Load(object sender, EventArgs e)
         {
-            // 初始化 ListView
-            InitListView();
+            // 初始化 GridView
+            InitResultView();
         }
 
         // 初始化 ListView
-        private void InitListView()
+        private void InitResultView()
         {
-            listViewResult.GridLines = true;
-            listViewResult.Columns.Add("类型", 80);
-            listViewResult.Columns.Add("编号", 160);
-            listViewResult.Columns.Add("原文", 400);
+            dataGridViewResult.Columns.Add("categoryName", "类型");
+            dataGridViewResult.Columns.Add("id", "编号");
+            dataGridViewResult.Columns.Add("text", "原文");
+            dataGridViewResult.Columns[0].Width = 80;
+            dataGridViewResult.Columns[1].Width = 160;
+            dataGridViewResult.Columns[2].Width = 400;
         }
 
         // 从文件加载原文数据
@@ -63,8 +67,7 @@ namespace lang_finder
         // 搜索
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            listViewResult.Clear();
-            InitListView();
+            dataGridViewResult.Rows.Clear();
             // 异步搜索
             Task.Run(new Action(Search));
         }
@@ -93,11 +96,10 @@ namespace lang_finder
         // 添加一项
         private void AddLangLineResult(LangLine langLine)
         {
-            ListViewItem item = new ListViewItem();
-            item.SubItems[0].Text = langDef.GetCategoryName(langLine.fileid);
-            item.SubItems.Add(langDef.GetCategory(langLine.fileid) + '-' + langLine.id);
-            item.SubItems.Add(langLine.text);
-            listViewResult.Items.Add(item);
+            string categoryName = langDef.GetCategoryName(langLine.fileid);
+            string id = langDef.GetCategory(langLine.fileid) + '-' + langLine.id;
+            string text = langLine.text;
+            dataGridViewResult.Rows.Add(categoryName, id, text);
         }
     }
 }
