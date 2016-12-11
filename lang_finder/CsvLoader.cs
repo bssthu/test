@@ -10,7 +10,7 @@ namespace lang_finder
 {
     class CsvLoader
     {
-        private const int MAX_RESULT_NUM = 100;
+        private const int MAX_RESULT_NUM = 1000;
         private LangLine[] langLines;
         private LangLine overflow = new LangLine(",,,,'最多显示前" + MAX_RESULT_NUM + "项结果'");
 

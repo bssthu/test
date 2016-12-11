@@ -68,6 +68,7 @@ namespace lang_finder
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             dataGridViewResult.Rows.Clear();
+            buttonSearch.Enabled = false;
             // 异步搜索
             Task.Run(new Action(Search));
         }
@@ -78,6 +79,7 @@ namespace lang_finder
             List<LangLine> results = csvLoader.Search(textBoxKeyword.Text,
                 checkBoxRegex.Checked, checkBoxIgnoreCase.Checked);
             Invoke(showSearchResult, new object[] { results });
+            Invoke(unlockUi);
         }
 
         // 异步显示搜索结果
