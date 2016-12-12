@@ -13,14 +13,6 @@ namespace lang_finder
         public string index { get; private set; }
         public string text { get; private set; }
 
-        public string id
-        {
-            get
-            {
-                return fileid + '-' + unknown + '-' + index;
-            }
-        }
-
         public LangLine(string line)
         {
             string[] words = line.Trim().Split(new char[] { ',' }, 5);
@@ -28,6 +20,30 @@ namespace lang_finder
             unknown = words[1].Trim('"');
             index = words[2].Trim('"');
             text = words[4].Substring(1, words[4].Length - 2);
+        }
+
+        // 用于显示的 ID
+        public string GetId(bool isPair)
+        {
+            string fileidP = fileid;
+            string unknownP = unknown;
+            string indexP = index;
+            try
+            {
+                // 补前导0
+                fileidP = Convert.ToUInt32(fileidP).ToString("D9");
+                unknownP = Convert.ToUInt32(unknownP).ToString("D2");
+                indexP = Convert.ToUInt32(indexP).ToString("D5");
+            }
+            catch (Exception) { }
+            if (isPair)
+            {
+                return indexP;
+            }
+            else
+            {
+                return fileidP + '-' + unknownP + '-' + indexP;
+            }
         }
     }
 }

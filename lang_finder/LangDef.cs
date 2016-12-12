@@ -10,11 +10,13 @@ namespace lang_finder
     {
         private Dictionary<string, string> fileidToCategory;
         private Dictionary<string, string> categoryToName;
+        private HashSet<string> pairs;
 
         public LangDef()
         {
             InitCategoryToName();
             InitFileidToCategory();
+            InitPairSet();
         }
 
         // 英文类型名
@@ -37,6 +39,38 @@ namespace lang_finder
                 return categoryToName[category];
             }
             return "";
+        }
+
+        // 属于 pair 类型（编号规则会不一样）
+        public bool IsPair(string fileid)
+        {
+            return pairs.Contains(fileid);
+        }
+
+        private void InitPairSet()
+        {
+            pairs = new HashSet<string>();
+
+            pairs.Add("51188213");
+            pairs.Add("21337012");
+            pairs.Add("70328405");
+            pairs.Add("263796174");
+            pairs.Add("242841733");
+            pairs.Add("228378404");
+            pairs.Add("52420949");
+            pairs.Add("265851556");
+            pairs.Add("162658389");
+            pairs.Add("70901198");
+            pairs.Add("8290981");
+            pairs.Add("165399380");
+            pairs.Add("18173141");
+            pairs.Add("211640654");
+            pairs.Add("267697733");
+            pairs.Add("139139780");
+            pairs.Add("198758357");
+            pairs.Add("132143172");
+            pairs.Add("116704773");
+            pairs.Add("235463860");
         }
 
         private void InitCategoryToName()

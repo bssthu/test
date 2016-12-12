@@ -111,7 +111,7 @@ namespace lang_finder
         private void AddLangLineResult(LangLine langLine)
         {
             string categoryName = langDef.GetCategoryName(langLine.fileid);
-            string id = langDef.GetCategory(langLine.fileid) + '-' + langLine.id;
+            string id = langDef.GetCategory(langLine.fileid) + '-' + langLine.GetId(langDef.IsPair(langLine.fileid));
             string text = langLine.text;
             dataGridViewResult.Rows.Add(categoryName, id, text);
         }
