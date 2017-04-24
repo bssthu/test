@@ -12,45 +12,84 @@ namespace lang_finder
     {
         private const int MAX_RESULT_NUM = 1000;
         private LangLine[] langLines;
-        private LangLine overflow = new LangLine(",,,,'最多显示前" + MAX_RESULT_NUM + "项结果'");
+        private LangLine overflow = new LangLine(",,,,'最多保留前" + MAX_RESULT_NUM + "项结果'");
 
-        public CsvLoader(string path)
+        private delegate string GetMatchTextDelegate(LangLine langLine);
+
+        public CsvLoader(string path, string pathZh)
         {
             string[] lines = File.ReadAllLines(path);
-            ParseText(lines);
+            string[] linesZh = File.ReadAllLines(pathZh);
+            ParseText(lines, linesZh);
         }
 
         // 解析每一行
-        private void ParseText(string[] lines)
+        private void ParseText(string[] lines, string[] linesZh)
         {
-            List<LangLine> langLineList = new List<LangLine>();
+            Dictionary<string, LangLine> langLineDict = new Dictionary<string, LangLine>();
+            // en
             foreach (string line in lines)
             {
                 try
                 {
-                    langLineList.Add(new LangLine(line));
+                    LangLine langLine = new LangLine(line);
+                    langLineDict.Add(langLine.GetIdWithoutCategory(false), langLine);
                 }
                 catch (Exception e)
                 {
                     System.Console.WriteLine(e.ToString());
                 }
             }
-            langLines = langLineList.ToArray();
+            // zh
+            foreach (string lineZh in linesZh)
+            {
+                try
+                {
+                    LangLine langLineZh = new LangLine(lineZh);
+                    string key = langLineZh.GetIdWithoutCategory(false);
+                    langLineDict[key].UpdateTextZh(langLineZh.text);
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine(e.ToString());
+                }
+            }
+            // convert
+            langLines = langLineDict.Values.ToArray();
+        }
+
+        // 搜索英文
+        public List<LangLine> SearchEn(string keyword, bool useRegex, bool ignoreCase)
+        {
+            return Search((langLine) => langLine.text, useRegex, keyword, ignoreCase);
+        }
+
+        // 搜索中文
+        public List<LangLine> SearchZh(string keyword, bool useRegex, bool ignoreCase)
+        {
+            return Search((langLine) => langLine.textZh, useRegex, keyword, ignoreCase);
+        }
+
+        // 搜索编号
+        public List<LangLine> SearchId(string keyword, bool useRegex, bool ignoreCase)
+        {
+            return Search((langLine) => langLine.id, useRegex, keyword, ignoreCase);
         }
 
         // 搜索
-        public List<LangLine> Search(string keyword, bool useRegex, bool ignoreCase)
+        private List<LangLine> Search(GetMatchTextDelegate GetMatchText,
+            bool useRegex, string keyword, bool ignoreCase)
         {
             if (useRegex)
             {
-                return SearchRegex(keyword, ignoreCase);
+                return SearchRegex(GetMatchText, keyword, ignoreCase);
             }
 
             List<LangLine> results = new List<LangLine>();
             foreach (LangLine langLine in langLines)
             {
                 // 如果找到就添加
-                if (IsMatch(langLine, keyword, ignoreCase))
+                if (IsMatch(GetMatchText(langLine), keyword, ignoreCase))
                 {
                     results.Add(langLine);
                 }
@@ -65,7 +104,7 @@ namespace lang_finder
         }
 
         // 正则搜索
-        private List<LangLine> SearchRegex(string pattern, bool ignoreCase)
+        private List<LangLine> SearchRegex(GetMatchTextDelegate GetMatchText, string pattern, bool ignoreCase)
         {
             RegexOptions option = RegexOptions.Compiled;
             if (ignoreCase)
@@ -85,7 +124,7 @@ namespace lang_finder
             {
                 foreach (string keyword in keywords)
                 {
-                    if (IsMatch(langLine, keyword, ignoreCase))
+                    if (IsMatch(GetMatchText(langLine), keyword, ignoreCase))
                     {
                         firstPassResults.Add(langLine);
                         break;
@@ -98,7 +137,7 @@ namespace lang_finder
             foreach (LangLine langLine in firstPassResults)
             {
                 // 如果找到就添加
-                if (IsMatchRegex(langLine, r))
+                if (IsMatchRegex(GetMatchText(langLine), r))
                 {
                     results.Add(langLine);
                 }
@@ -113,22 +152,21 @@ namespace lang_finder
         }
 
         // 匹配关键字
-        private bool IsMatch(LangLine langLine, string keyword, bool ignoreCase)
+        private bool IsMatch(String text, string keyword, bool ignoreCase)
         {
-            string text = langLine.text;
             if (ignoreCase)
             {
                 keyword = keyword.ToLower();
                 text = text.ToLower();
             }
-            
+
             return text.Contains(keyword);
         }
 
         // 正则匹配
-        private bool IsMatchRegex(LangLine langLine, Regex r)
+        private bool IsMatchRegex(string text, Regex r)
         {
-            Match m = r.Match(langLine.text);
+            Match m = r.Match(text);
             return m.Success;
         }
     }

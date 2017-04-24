@@ -8,11 +8,29 @@ namespace lang_finder
 {
     class LangDef
     {
+        private static LangDef _instance;
+
         private Dictionary<string, string> fileidToCategory;
         private Dictionary<string, string> categoryToName;
         private HashSet<string> pairs;
 
-        public LangDef()
+        public static LangDef instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
+        public static void Initialize()
+        {
+            if (_instance == null)
+            {
+                _instance = new LangDef();
+            }
+        }
+
+        private LangDef()
         {
             InitCategoryToName();
             InitFileidToCategory();

@@ -13,7 +13,6 @@ namespace lang_finder
     public partial class FinderForm : Form
     {
         private CsvLoader csvLoader;
-        private LangDef langDef;
 
         private delegate void UnlockUiDelegate();
         private UnlockUiDelegate unlockUi;
@@ -24,13 +23,13 @@ namespace lang_finder
         public FinderForm()
         {
             InitializeComponent();
-            langDef = new LangDef();
+            LangDef.Initialize();
 
             checkBoxRegex.Checked = Properties.Settings.Default.useRegex;
             checkBoxIgnoreCase.Checked = Properties.Settings.Default.ignoreCase;
-            AcceptButton = buttonSearch;
+            AcceptButton = buttonSearchEn;
 
-            unlockUi = () => buttonSearch.Enabled = true;
+            unlockUi = () => EnableSearchButtons(true);
             showSearchResult = (results) => ShowSearchResult(results);
             // 异步加载原文数据
             Task.Run(new Action(LoadCsv));
@@ -57,9 +56,11 @@ namespace lang_finder
             dataGridViewResult.Columns.Add("categoryName", "类型");
             dataGridViewResult.Columns.Add("id", "编号");
             dataGridViewResult.Columns.Add("text", "原文");
+            dataGridViewResult.Columns.Add("textZh", "译文");
             dataGridViewResult.Columns[0].Width = 80;
             dataGridViewResult.Columns[1].Width = 160;
-            dataGridViewResult.Columns[2].Width = 400;
+            dataGridViewResult.Columns[2].Width = 300;
+            dataGridViewResult.Columns[3].Width = 300;
         }
 
         // 从文件加载原文数据
@@ -67,7 +68,7 @@ namespace lang_finder
         {
             try
             {
-                csvLoader = new CsvLoader("./en.lang.csv");
+                csvLoader = new CsvLoader("./en.lang.csv", "./zh.lang.csv");
                 Invoke(unlockUi);
             }
             catch (Exception e)
@@ -76,19 +77,55 @@ namespace lang_finder
             }
         }
 
-        // 搜索
-        private void buttonSearch_Click(object sender, EventArgs e)
+        // 搜索英文
+        private void buttonSearchEn_Click(object sender, EventArgs e)
         {
             dataGridViewResult.Rows.Clear();
-            buttonSearch.Enabled = false;
+            EnableSearchButtons(false);
             // 异步搜索
-            Task.Run(new Action(Search));
+            Task.Run(new Action(SearchEn));
         }
 
-        // 异步搜索
-        private void Search()
+        // 搜索中文
+        private void buttonSearchZh_Click(object sender, EventArgs e)
         {
-            List<LangLine> results = csvLoader.Search(textBoxKeyword.Text,
+            dataGridViewResult.Rows.Clear();
+            EnableSearchButtons(false);
+            // 异步搜索
+            Task.Run(new Action(SearchZh));
+        }
+
+        // 搜索编号
+        private void buttonSearchId_Click(object sender, EventArgs e)
+        {
+            dataGridViewResult.Rows.Clear();
+            EnableSearchButtons(false);
+            // 异步搜索
+            Task.Run(new Action(SearchId));
+        }
+
+        // 异步搜索英文
+        private void SearchEn()
+        {
+            List<LangLine> results = csvLoader.SearchEn(textBoxKeyword.Text,
+                checkBoxRegex.Checked, checkBoxIgnoreCase.Checked);
+            Invoke(showSearchResult, new object[] { results });
+            Invoke(unlockUi);
+        }
+
+        // 异步搜索中文
+        private void SearchZh()
+        {
+            List<LangLine> results = csvLoader.SearchZh(textBoxKeyword.Text,
+                checkBoxRegex.Checked, checkBoxIgnoreCase.Checked);
+            Invoke(showSearchResult, new object[] { results });
+            Invoke(unlockUi);
+        }
+
+        // 异步搜索编号
+        private void SearchId()
+        {
+            List<LangLine> results = csvLoader.SearchId(textBoxKeyword.Text,
                 checkBoxRegex.Checked, checkBoxIgnoreCase.Checked);
             Invoke(showSearchResult, new object[] { results });
             Invoke(unlockUi);
@@ -110,10 +147,19 @@ namespace lang_finder
         // 添加一项
         private void AddLangLineResult(LangLine langLine)
         {
-            string categoryName = langDef.GetCategoryName(langLine.fileid);
-            string id = langDef.GetCategory(langLine.fileid) + '-' + langLine.GetId(langDef.IsPair(langLine.fileid));
+            string categoryName = langLine.categoryName;
+            string id = langLine.id;
             string text = langLine.text;
-            dataGridViewResult.Rows.Add(categoryName, id, text);
+            string textZh = langLine.textZh;
+            dataGridViewResult.Rows.Add(categoryName, id, text, textZh);
+        }
+
+        // 启用/禁用 搜索 按钮
+        private void EnableSearchButtons(bool enable)
+        {
+            buttonSearchEn.Enabled = enable;
+            buttonSearchZh.Enabled = enable;
+            buttonSearchId.Enabled = enable;
         }
     }
 }

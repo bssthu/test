@@ -12,6 +12,12 @@ namespace lang_finder
         public string unknown { get; private set; }
         public string index { get; private set; }
         public string text { get; private set; }
+        public string textZh { get; private set; }
+
+        // 类别名字（中文）
+        public string categoryName { get; private set; }
+        // 用于显示的 ID
+        public string id { get; private set; }
 
         public LangLine(string line)
         {
@@ -20,10 +26,20 @@ namespace lang_finder
             unknown = words[1].Trim('"');
             index = words[2].Trim('"');
             text = words[4].Substring(1, words[4].Length - 2);
+            textZh = text;
+
+            categoryName = LangDef.instance.GetCategoryName(fileid);
+            id = LangDef.instance.GetCategory(fileid) + '-'
+                + GetIdWithoutCategory(LangDef.instance.IsPair(fileid));
         }
 
-        // 用于显示的 ID
-        public string GetId(bool isPair)
+        // 更新中文文本
+        public void UpdateTextZh(string textZh)
+        {
+            this.textZh = textZh;
+        }
+
+        public string GetIdWithoutCategory(bool isPair)
         {
             string fileidP = fileid;
             string unknownP = unknown;
@@ -31,9 +47,12 @@ namespace lang_finder
             try
             {
                 // 补前导0
-                fileidP = Convert.ToUInt32(fileidP).ToString("D9");
-                unknownP = Convert.ToUInt32(unknownP).ToString("D2");
-                indexP = Convert.ToUInt32(indexP).ToString("D5");
+                if (fileidP != "")
+                {
+                    fileidP = Convert.ToUInt32(fileidP).ToString("D9");
+                    unknownP = Convert.ToUInt32(unknownP).ToString("D2");
+                    indexP = Convert.ToUInt32(indexP).ToString("D5");
+                }
             }
             catch (Exception) { }
             if (isPair)
