@@ -115,6 +115,9 @@
             this.dataGridViewResult.RowTemplate.Height = 23;
             this.dataGridViewResult.Size = new System.Drawing.Size(726, 465);
             this.dataGridViewResult.TabIndex = 7;
+            this.dataGridViewResult.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewResult_CellBeginEdit);
+            this.dataGridViewResult.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewResult_CellDoubleClick);
+            this.dataGridViewResult.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewResult_CellEndEdit);
             // 
             // buttonSearchZh
             // 

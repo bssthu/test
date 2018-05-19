@@ -20,6 +20,8 @@ namespace lang_finder
         private delegate void ShowSearchResultDelegate(List<LangLine> results);
         private ShowSearchResultDelegate showSearchResult;
 
+        private String currentCellValue = "";
+
         public FinderForm()
         {
             InitializeComponent();
@@ -61,6 +63,8 @@ namespace lang_finder
             dataGridViewResult.Columns[1].Width = 160;
             dataGridViewResult.Columns[2].Width = 300;
             dataGridViewResult.Columns[3].Width = 300;
+            dataGridViewResult.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dataGridViewResult.ReadOnly = false;
         }
 
         // 从文件加载原文数据
@@ -75,6 +79,23 @@ namespace lang_finder
             {
                 MessageBox.Show(e.ToString());
             }
+        }
+
+        // 双击进入编辑模式
+        private void dataGridViewResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //dataGridViewResult.CurrentCell = dataGridViewResult.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            dataGridViewResult.BeginEdit(false);
+        }
+
+        private void dataGridViewResult_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            currentCellValue = dataGridViewResult.CurrentCell.Value.ToString();
+        }
+
+        private void dataGridViewResult_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewResult.CurrentCell.Value = currentCellValue;
         }
 
         // 搜索英文
