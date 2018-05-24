@@ -201,6 +201,8 @@ namespace lang_finder
             fileidToCategory.Add("150983124", "greeting");
             fileidToCategory.Add("150987220", "greeting");
             fileidToCategory.Add("150991316", "greeting");
+            fileidToCategory.Add("169602884", "greeting");
+            fileidToCategory.Add("259945604", "greeting");
             fileidToCategory.Add("3427285", "interact-action");
             fileidToCategory.Add("6658117", "interact-action");
             fileidToCategory.Add("8158238", "interact-action");
@@ -322,6 +324,7 @@ namespace lang_finder
             fileidToCategory.Add("207758933", "more-ui");
             fileidToCategory.Add("210591177", "more-ui");
             fileidToCategory.Add("216055893", "more-ui");
+            fileidToCategory.Add("216271813", "more-ui");
             fileidToCategory.Add("217086453", "more-ui");
             fileidToCategory.Add("219429541", "more-ui");
             fileidToCategory.Add("219582791", "more-ui");
@@ -330,6 +333,7 @@ namespace lang_finder
             fileidToCategory.Add("232566869", "more-ui");
             fileidToCategory.Add("236931909", "more-ui");
             fileidToCategory.Add("241484741", "more-ui");
+            fileidToCategory.Add("242643895", "more-ui");
             fileidToCategory.Add("245765621", "more-ui");
             fileidToCategory.Add("251183959", "more-ui");
             fileidToCategory.Add("257983733", "more-ui");
@@ -372,9 +376,11 @@ namespace lang_finder
             fileidToCategory.Add("13753646", "tip");
             fileidToCategory.Add("18104308", "tip");
             fileidToCategory.Add("24991438", "tip");
+            fileidToCategory.Add("26044436", "tip");
             fileidToCategory.Add("35111812", "tip");
             fileidToCategory.Add("37288388", "tip");
             fileidToCategory.Add("41714900", "tip");
+            fileidToCategory.Add("43934149", "tip");
             fileidToCategory.Add("46427668", "tip");
             fileidToCategory.Add("49496084", "tip");
             fileidToCategory.Add("50143374", "tip");
@@ -421,6 +427,8 @@ namespace lang_finder
             fileidToCategory.Add("191744852", "tip");
             fileidToCategory.Add("193511764", "tip");
             fileidToCategory.Add("193678788", "tip");
+            fileidToCategory.Add("199723588", "tip");
+            fileidToCategory.Add("202153303", "tip");
             fileidToCategory.Add("212113054", "tip");
             fileidToCategory.Add("217056980", "tip");
             fileidToCategory.Add("220262196", "tip");
