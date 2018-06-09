@@ -29,8 +29,15 @@ namespace lang_finder
             textZh = text;
 
             categoryName = LangDef.instance.GetCategoryName(fileid);
-            id = LangDef.instance.GetCategory(fileid) + '-'
-                + GetIdWithoutCategory(LangDef.instance.IsPair(fileid));
+            if (fileid == "UI")
+            {
+                id = index;
+            }
+            else
+            {
+                id = LangDef.instance.GetCategory(fileid) + '-'
+                    + GetIdWithoutCategory(LangDef.instance.IsPair(fileid));
+            }
         }
 
         // 更新中文文本
@@ -46,9 +53,9 @@ namespace lang_finder
             string indexP = index;
             try
             {
-                // 补前导0
-                if (fileidP != "")
+                if (fileidP != "" && fileid != "UI")
                 {
+                    // 补前导0
                     fileidP = Convert.ToUInt32(fileidP).ToString("D9");
                     unknownP = Convert.ToUInt32(unknownP).ToString("D2");
                     indexP = Convert.ToUInt32(indexP).ToString("D5");

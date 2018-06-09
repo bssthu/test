@@ -138,6 +138,7 @@ namespace lang_finder
         {
             fileidToCategory = new Dictionary<string, string>();
 
+            fileidToCategory.Add("UI", "UI");
             fileidToCategory.Add("12529189", "achievement");
             fileidToCategory.Add("188155806", "achievement");
             fileidToCategory.Add("172030117", "achievement");
