@@ -29,6 +29,7 @@ namespace lang_finder
 
             checkBoxRegex.Checked = Properties.Settings.Default.useRegex;
             checkBoxIgnoreCase.Checked = Properties.Settings.Default.ignoreCase;
+            checkBoxAutoSizeRows.Checked = Properties.Settings.Default.autoSizeRows;
             AcceptButton = buttonSearchEn;
 
             unlockUi = () => EnableSearchButtons(true);
@@ -48,6 +49,7 @@ namespace lang_finder
             // save settings
             Properties.Settings.Default.useRegex = checkBoxRegex.Checked;
             Properties.Settings.Default.ignoreCase = checkBoxIgnoreCase.Checked;
+            Properties.Settings.Default.autoSizeRows = checkBoxAutoSizeRows.Checked;
             Properties.Settings.Default.Save();
             base.OnClosing(e);
         }
@@ -65,6 +67,11 @@ namespace lang_finder
             dataGridViewResult.Columns[3].Width = 300;
             dataGridViewResult.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewResult.ReadOnly = false;
+            dataGridViewResult.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            if (checkBoxAutoSizeRows.Checked)
+            {
+                dataGridViewResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            }
         }
 
         // 从文件加载原文数据
@@ -181,6 +188,19 @@ namespace lang_finder
             buttonSearchEn.Enabled = enable;
             buttonSearchZh.Enabled = enable;
             buttonSearchId.Enabled = enable;
+        }
+
+        // 是否启用自动行高
+        private void checkBoxAutoSizeRows_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAutoSizeRows.Checked)
+            {
+                dataGridViewResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            }
+            else
+            {
+                dataGridViewResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            }
         }
     }
 }

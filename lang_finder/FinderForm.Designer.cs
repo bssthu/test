@@ -38,6 +38,7 @@
             this.dataGridViewResult = new System.Windows.Forms.DataGridView();
             this.buttonSearchZh = new System.Windows.Forms.Button();
             this.buttonSearchId = new System.Windows.Forms.Button();
+            this.checkBoxAutoSizeRows = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,11 +144,23 @@
             this.buttonSearchId.UseVisualStyleBackColor = true;
             this.buttonSearchId.Click += new System.EventHandler(this.buttonSearchId_Click);
             // 
+            // checkBoxAutoSizeRows
+            // 
+            this.checkBoxAutoSizeRows.AutoSize = true;
+            this.checkBoxAutoSizeRows.Location = new System.Drawing.Point(107, 61);
+            this.checkBoxAutoSizeRows.Name = "checkBoxAutoSizeRows";
+            this.checkBoxAutoSizeRows.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxAutoSizeRows.TabIndex = 8;
+            this.checkBoxAutoSizeRows.Text = "自动行高";
+            this.checkBoxAutoSizeRows.UseVisualStyleBackColor = true;
+            this.checkBoxAutoSizeRows.CheckedChanged += new System.EventHandler(this.checkBoxAutoSizeRows_CheckedChanged);
+            // 
             // FinderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 561);
+            this.Controls.Add(this.checkBoxAutoSizeRows);
             this.Controls.Add(this.dataGridViewResult);
             this.Controls.Add(this.checkBoxIgnoreCase);
             this.Controls.Add(this.label2);
@@ -178,6 +191,7 @@
         private System.Windows.Forms.DataGridView dataGridViewResult;
         private System.Windows.Forms.Button buttonSearchZh;
         private System.Windows.Forms.Button buttonSearchId;
+        private System.Windows.Forms.CheckBox checkBoxAutoSizeRows;
     }
 }
 
