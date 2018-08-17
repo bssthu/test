@@ -380,15 +380,18 @@ namespace lang_finder
             fileidToCategory.Add("26044436", "tip");
             fileidToCategory.Add("35111812", "tip");
             fileidToCategory.Add("37288388", "tip");
+            fileidToCategory.Add("39248996", "tip");
             fileidToCategory.Add("41714900", "tip");
             fileidToCategory.Add("43934149", "tip");
             fileidToCategory.Add("46427668", "tip");
             fileidToCategory.Add("49496084", "tip");
             fileidToCategory.Add("50143374", "tip");
+            fileidToCategory.Add("56558612", "tip");
             fileidToCategory.Add("57952500", "tip");
             fileidToCategory.Add("58548677", "tip");
             fileidToCategory.Add("60008005", "tip");
             fileidToCategory.Add("62156964", "tip");
+            fileidToCategory.Add("63937076", "tip");
             fileidToCategory.Add("74148292", "tip");
             fileidToCategory.Add("81761156", "tip");
             fileidToCategory.Add("84281828", "tip");
@@ -405,6 +408,8 @@ namespace lang_finder
             fileidToCategory.Add("123229230", "tip");
             fileidToCategory.Add("129382708", "tip");
             fileidToCategory.Add("130851621", "tip");
+            fileidToCategory.Add("132595845", "tip");
+            fileidToCategory.Add("135729940", "tip");
             fileidToCategory.Add("139528164", "tip");
             fileidToCategory.Add("139757006", "tip");
             fileidToCategory.Add("141135108", "tip");
