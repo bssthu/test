@@ -64,7 +64,6 @@ namespace lang_finder
         {
             return pairs.Contains(fileid);
         }
-
         private void InitPairSet()
         {
             pairs = new HashSet<string>();
@@ -274,6 +273,7 @@ namespace lang_finder
             fileidToCategory.Add("206046340", "more-desc");
             fileidToCategory.Add("224875171", "more-desc");
             fileidToCategory.Add("5759525", "more-ui");
+            fileidToCategory.Add("9019316", "more-ui");
             fileidToCategory.Add("9424005", "more-ui");
             fileidToCategory.Add("17915077", "more-ui");
             fileidToCategory.Add("26811173", "more-ui");
@@ -357,6 +357,7 @@ namespace lang_finder
             fileidToCategory.Add("103224356", "quest-talk-long");
             fileidToCategory.Add("115740052", "quest-talk-long");
             fileidToCategory.Add("187173764", "quest-talk-long");
+            fileidToCategory.Add("66737390", "quest-talk-long");
             fileidToCategory.Add("121487972", "quest-talk-long");
             fileidToCategory.Add("204987124", "quest-talk-long");
             fileidToCategory.Add("228103012", "quest-talk-long");
@@ -390,6 +391,7 @@ namespace lang_finder
             fileidToCategory.Add("57952500", "tip");
             fileidToCategory.Add("58548677", "tip");
             fileidToCategory.Add("60008005", "tip");
+            fileidToCategory.Add("60139732", "tip");
             fileidToCategory.Add("62156964", "tip");
             fileidToCategory.Add("63937076", "tip");
             fileidToCategory.Add("74148292", "tip");
@@ -405,6 +407,7 @@ namespace lang_finder
             fileidToCategory.Add("115318052", "tip");
             fileidToCategory.Add("115391780", "tip");
             fileidToCategory.Add("117539474", "tip");
+            fileidToCategory.Add("121548292", "tip");
             fileidToCategory.Add("123229230", "tip");
             fileidToCategory.Add("129382708", "tip");
             fileidToCategory.Add("130851621", "tip");
@@ -419,6 +422,7 @@ namespace lang_finder
             fileidToCategory.Add("145684164", "tip");
             fileidToCategory.Add("148453652", "tip");
             fileidToCategory.Add("153349653", "tip");
+            fileidToCategory.Add("154659316", "tip");
             fileidToCategory.Add("155022052", "tip");
             fileidToCategory.Add("156570558", "tip");
             fileidToCategory.Add("156664686", "tip");
